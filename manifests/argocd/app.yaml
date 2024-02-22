@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "argocd-defi"
+spec:
+  destination:
+    namespace: binco97-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: manifests/base
+    repoURL: https://github.com/BlackMamba97s/argocd-defi
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

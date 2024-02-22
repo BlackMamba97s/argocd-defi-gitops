@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: argocd-defi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd-defi
+  template:
+    metadata:
+      labels:
+        app: argocd-defi
+        app.kubernetes.io/component: backstage
+        backstage.io/kubernetes-id: binco97-dev
+    spec:
+      containers:
+        - name: argocd-defi
+          image: quay.io/quay.io/argoproj/argocd:v2.9.5/argocd-defi:latest
+          ports:
+            - name: http-80
+              containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '500m'
